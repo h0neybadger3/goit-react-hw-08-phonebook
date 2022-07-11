@@ -10,15 +10,8 @@ export default function LoginForm() {
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
-    switch (name) {
-      case 'email':
-        return setEmail(value);
-      case 'password':
-        return setPassword(value);
 
-      default:
-        return;
-    }
+    name === 'email' ? setEmail(value) : setPassword(value);
   };
 
   const handleSubmit = e => {

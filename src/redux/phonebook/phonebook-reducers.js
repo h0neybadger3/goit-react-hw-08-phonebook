@@ -20,7 +20,7 @@ const notify = notification =>
   });
 
 const contacts = createReducer([], {
-  [getContacts.fulfilled]: (_, { payload }) => payload,
+  [getContacts.fulfilled]: (_state, { payload }) => payload,
   [postContacts.fulfilled]: (state, { payload }) => {
     notify(`${payload.name} has been added to your contacts`);
     return [...state, payload];
@@ -47,7 +47,7 @@ const isLoading = createReducer(false, {
 });
 
 const filter = createReducer('', {
-  [actions.changeFilter]: (_, { payload }) => payload,
+  [actions.changeFilter]: (_state, { payload }) => payload,
 });
 
 export default combineReducers({

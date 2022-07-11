@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
 import { Form, Wrapper, Input, SubmitButton } from './ContactForm.styled';
 import { phonebookOperations, phonebookSelectors } from 'redux/phonebook';
 
 export default function ContactForm() {
-  const nameInputId = nanoid();
-  const phoneInputId = nanoid();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const phonebook = useSelector(phonebookSelectors.getContacts);
@@ -16,16 +13,8 @@ export default function ContactForm() {
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'phone':
-        setNumber(value);
-        break;
-      default:
-        return;
-    }
+
+    name === 'name' ? setName(value) : setNumber(value);
   };
 
   const handleSubmit = e => {
@@ -62,7 +51,7 @@ export default function ContactForm() {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Wrapper htmlFor={nameInputId}>
+        <Wrapper>
           Name
           <Input
             type="text"
@@ -72,11 +61,10 @@ export default function ContactForm() {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
             value={name}
-            id={nameInputId}
             onChange={handleChange}
           />
         </Wrapper>
-        <Wrapper htmlFor={phoneInputId}>
+        <Wrapper>
           Phonebook
           <Input
             type="tel"
@@ -86,7 +74,6 @@ export default function ContactForm() {
             title="Phone phone must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
             value={number}
-            id={phoneInputId}
             onChange={handleChange}
           />
         </Wrapper>

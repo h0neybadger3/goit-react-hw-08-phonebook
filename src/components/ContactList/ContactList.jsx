@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import { phonebookOperations, phonebookSelectors } from 'redux/phonebook';
-import ContactItem from './ContactItem';
+import ContactItem from './ContactListItem/ContactItem';
 
 const ContactList = () => {
   const phonebook = useSelector(phonebookSelectors.getVisibleContacts);
@@ -25,16 +24,6 @@ const ContactList = () => {
       ))}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    })
-  ),
 };
 
 export default ContactList;
